@@ -134,6 +134,6 @@ jobs:
           persist-credentials: false
       - name: Deploy with Ansible
         working-directory: ansible
-        run: ansible-playbook site.yml -e "app_tag=$GITHUB_SHA"
+        run: ansible-playbook site.yml -e "app_tag=$GITHUB_SHA refresh_apt_cache=false"
       - name: Check through Nginx
         run: curl --fail --silent --show-error --max-time 10 "http://$VM_HOST/health"
