@@ -3,8 +3,8 @@
   ansible.builtin.apt:
     name: nginx
     state: present
-    update_cache: true
-    cache_valid_time: 3600
+    update_cache: "{{ refresh_apt_cache | default(true) | bool }}"
+    cache_valid_time: "{{ 3600 if (refresh_apt_cache | default(true) | bool) else 0 }}"
 
 - name: Configure application reverse proxy
   ansible.builtin.template:
